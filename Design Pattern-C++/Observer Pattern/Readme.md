@@ -24,3 +24,10 @@ In the main function:
 A Group object is created, and three User objects subscribe to it. Then, the Group object notifies all the subscribers about a change. After that, one User object unsubscribes from the Group, and the Group notifies the remaining subscribers again.
 
 Overall, this code demonstrates how the Observer Design Pattern can be used to implement a simple publish-subscribe mechanism.
+
+Note:
+In the given code, we are using dynamic_cast to convert a pointer of type ISubscriber* to User*. This is because the notify() function in Group class needs to call getId() function of User class for each subscriber. However, the gp list/vector in Group class is of type ISubscriber*, which does not have the getId() function.
+
+By using dynamic_cast, we can check if the object pointed to by the ISubscriber* pointer is actually an object of User class, and if so, convert the pointer to User*. Then, we can call the getId() function on the converted User* pointer.
+
+Note that dynamic_cast returns a null pointer if the cast fails, so we can use it to check if the object pointed to by the ISubscriber* pointer is actually an object of User class before attempting the cast.
