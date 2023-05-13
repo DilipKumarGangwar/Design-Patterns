@@ -1,0 +1,8 @@
+//Liskov Substitution Principle
+#include<iostream>
+using namespace std;
+
+class MenuItem
+{
+    string
+};

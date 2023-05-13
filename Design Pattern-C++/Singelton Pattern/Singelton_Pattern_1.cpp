@@ -1,22 +1,26 @@
-/* Singelton Design pattern 
-Only One object/Instance is created for this type of class
-Useful when we want to create single database connection object
+/* Singelton Design pattern
+
+Use: Only One object/Instance is created for this type of class
+Useful when we want to create single database connection object, single looging object etc.
+
+
+Note: This is Not Thread Safe 
 */
 
 #include <bits/stdc++.h> 
 using namespace std; 
 
 class Singelton{
-  static Singelton *a;
+  static Singelton *instance;
   int data;
   //private constructor
   Singelton(){ }
 
   public:
   static Singelton* getInstance(){
-    if(a==nullptr)
-       a= new Singelton();
-    return a;   
+    if(instance==nullptr)
+       instance= new Singelton();
+    return instance;   
   }
   void setData(int x){
      data=x;
@@ -27,7 +31,7 @@ class Singelton{
 
 };
 
-Singelton* Singelton::a=nullptr;
+Singelton* Singelton::instance=nullptr;
 
 int main(){
    Singelton* object1=Singelton::getInstance();

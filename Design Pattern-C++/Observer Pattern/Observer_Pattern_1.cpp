@@ -24,7 +24,9 @@ class User:public ISubscriber
        void notify(string msg)
        {
            cout<<"User "<<m_userId<<" Received Message from Publisher: "<<msg<<endl;
-       }       
+       }
+
+       
 };
 
 class Group
@@ -52,7 +54,7 @@ class Group
             //All users/Observers are notified one by one
             for(auto user : gp)
             {
-                cout<<"Sending Message to user "<< dynamic_cast<User*>(user)->getId() <<endl;
+                cout<<"Sending Message to user "<< user->getId() <<endl;
                 user->notify(msg);  
             }
         }
