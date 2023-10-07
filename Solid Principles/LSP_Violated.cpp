@@ -1,4 +1,4 @@
-//Liskov Substitution Principle
+//Liskov Substitution Principle - Violated
 #include<iostream>
 using namespace std;
 
@@ -16,9 +16,9 @@ class MenuItem
      virtual int getPrice()
      {
           
-          return price  ;
+          return price ;
      }
-  
+   
 };
 
 
@@ -30,24 +30,30 @@ class BeverageItem: public MenuItem
          
       }
 
-     int getPrice()
+    int getPriceWithDiscount(int discount)
      {
           
-          return  price - getDiscount();
+          return  price - discount;
      }
- private:
-     int getDiscount()
-    {
-        int discount = 2;  //2 Rs is discount
-        return discount;
-    }    
-  
+
       
 };
+
+//LSP is viloated here
 int printBill(MenuItem *m)
 {
-    
-    return  m->getPrice();
+    BeverageItem * b = dynamic_cast<BeverageItem*>(m);
+    if(b)
+    {
+        cout<<"Passed instance is of type BeverageItem "<<endl;
+        return b->getPriceWithDiscount(2); //2 rs is discount
+        
+    }  
+    else
+    {
+      cout<<"Passed instance is of type MenuItem "<<endl;
+      return m->getPrice();
+    }
   
 }
 
@@ -57,8 +63,8 @@ int main()
     BeverageItem *b = new BeverageItem("coffee", 40 );
   
     int bill= printBill(m);
-    cout<<"Total Bill for MenuItem = "<<bill<<endl;
+    cout<<"Total Bill = "<<bill<<endl;
     bill= printBill(b);
-    cout<<"Total Bill for Beverages = "<<bill<<endl;
+    cout<<"Total Bill = "<<bill<<endl;
     return 0;
 }

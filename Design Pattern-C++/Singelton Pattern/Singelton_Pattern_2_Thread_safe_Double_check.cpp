@@ -1,43 +1,4 @@
-// #include<iostream>
-
-// using namespace std;
-
-
-// class Singleton {
-// public:
-//     static Singleton* getInstance() {
-//         if (instance == nullptr) {
-//             instance = new Singleton();
-//             counter++;
-//         }
-//         return instance;
-//     }
-   
-//     static int getValue()  {
-//         return counter;
-//     }
-// private:
-//     Singleton() {} // Private constructor to prevent instantiation.
-//     //Singleton(Singleton const&) = delete; // Delete copy constructor.
-//     //void operator=(Singleton const&) = delete; // Delete assignment operator.
-//      static Singleton* instance;
-//      static  int counter;
-//      int value;
-// };
-// Singleton* Singleton:: instance = nullptr;
-// int Singleton:: counter =0;
-
-// int main()
-// {
-//     Singleton *singleton1 = Singleton::getInstance();
-//     cout<<Singleton::getValue()<<endl;
-//     Singleton *singleton2 = Singleton::getInstance();
-//     cout<<Singleton::getValue()<<endl;
-    
-// }
-
-
-//This is thread Safe always , but locks are expensive
+//Thread safe with Double check
 #include<iostream>
 
 #include<thread>
@@ -49,12 +10,15 @@ using namespace std;
 class Singleton {
 public:
     static Singleton* getInstance() {
+      if(instance == nullptr)
+      {
         mtx.lock();
         if (instance == nullptr) {
             instance = new Singleton();
             counter++;
         }
         mtx.unlock();
+      }
         return instance;
     }
    

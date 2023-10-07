@@ -11,18 +11,17 @@ Note: This is Not Thread Safe
 using namespace std; 
 
 class Singelton{
-  static Singelton *instance;
+  static Singelton *instance ;
   int data;
-  //private constructor
-  Singelton(){ }
+   // Not needed as it is default one
+//   //private constructor
+//   Singelton(){ }
  
 
   public:
-   Singelton(const Singelton&) = delete;
-    Singelton& operator=(const Singelton&) = delete;
+  
   static Singelton* getInstance(){
-    if(instance==nullptr)
-       instance= new Singelton();
+  
     return instance;   
   }
   void setData(int x){
@@ -34,7 +33,7 @@ class Singelton{
 
 };
 
-Singelton* Singelton::instance=nullptr;
+Singelton * Singelton::instance = new Singelton();
 
 int main(){
    Singelton* object1=Singelton::getInstance();
@@ -48,10 +47,7 @@ int main(){
    else
     cout<<" Not Equal";
 
-    //These results in errors as corresponding copy constr and copy assignment op are 
-    //mentioned as deleted
-   *object1 = *object2; 
-   Singelton object3=*object2 ;
+    
    return 0;
 }
 
