@@ -5,9 +5,10 @@
 #include <iostream>
 using namespace std;
 
-class IToppingsDecorator : public IBasePizza   //Inheritance
+class IToppingsDecorator : public IBasePizza  //Inheritance
 {
-     
+    //  public:
+    // virtual int cost()=0;
 };
 
 #endif
